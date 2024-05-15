@@ -1,3 +1,5 @@
+package feiner.rijks;
+
 import json.*;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +16,7 @@ public class RijksServiceTest {
     ArtObjects artObjects = service.pageSearch(page).blockingGet();
     // then
     ArtObject artObject = artObjects.artObject[0];
-    WebImage webImage = artObject.webImage;
+    final WebImage webImage = artObject.webImage;
     assertNotNull(artObject.title);
     assertNotNull(artObject.longTitle);
     assertNotNull(artObject.principalOrFirstMaker);
@@ -25,6 +27,7 @@ public class RijksServiceTest {
     assertNotEquals(0, webImage.height);
     assertNotNull(webImage.url);
 }
+
 @Test
 void querySearch() {
     // given
@@ -35,7 +38,7 @@ void querySearch() {
     ArtObjects artObjects = service.querySearch(page, query).blockingGet();
     // then
     ArtObject artObject = artObjects.artObject[0];
-    WebImage webImage = artObject.webImage;
+    final WebImage webImage = artObject.webImage;
     assertNotNull(artObject.title);
     assertNotNull(artObject.longTitle);
     assertNotNull(artObject.principalOrFirstMaker);
@@ -46,6 +49,7 @@ void querySearch() {
     assertNotEquals(0, webImage.height);
     assertNotNull(webImage.url);
 }
+
     @Test
     void artistSearch() {
         // given
@@ -56,7 +60,7 @@ void querySearch() {
         ArtObjects artObjects = service.querySearch(page, artist).blockingGet();
         // then
         ArtObject artObject = artObjects.artObject[0];
-        WebImage webImage = artObject.webImage;
+        final WebImage webImage = artObject.webImage;
         assertNotNull(artObject.title);
         assertNotNull(artObject.longTitle);
         assertNotNull(artObject.principalOrFirstMaker);
