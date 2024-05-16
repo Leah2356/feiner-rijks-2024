@@ -1,6 +1,6 @@
 package json;
 
-public class ArtObjects {
+public class ArtObject {
     // Each art object has a title, longTitle, webImage and principalOrFirstMaker
     public String title;
     public String longTitle;
