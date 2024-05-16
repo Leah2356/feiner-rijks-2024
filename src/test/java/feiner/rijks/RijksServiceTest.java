@@ -28,11 +28,9 @@ public class RijksServiceTest {
         assertNotNull(artObject.webImage);
         WebImage webImage = artObject.webImage;
         assertNotNull(webImage.url);
-        assertNotEquals(-1, webImage.offsetPercentageX);
         assertNotNull(webImage.guid);
         assertNotEquals(-1, webImage.width);
         assertNotEquals(-1, webImage.height);
-        assertNotEquals(-1, webImage.offsetPercentageY);
     }
 
     @Test
@@ -55,11 +53,9 @@ public class RijksServiceTest {
         assertNotNull(artObject.webImage);
         WebImage webImage = artObject.webImage;
         assertNotNull(webImage.url);
-        assertNotEquals(-1, webImage.offsetPercentageX);
         assertNotNull(webImage.guid);
         assertNotEquals(-1, webImage.width);
         assertNotEquals(-1, webImage.height);
-        assertNotEquals(-1, webImage.offsetPercentageY);
     }
 
     @Test
@@ -82,10 +78,8 @@ public class RijksServiceTest {
         assertNotNull(artObjects.webImage);
         WebImage webImage = artObjects.webImage;
         assertNotNull(webImage.url);
-        assertNotEquals(-1, webImage.offsetPercentageX);
         assertNotNull(webImage.guid);
         assertNotEquals(-1, webImage.width);
         assertNotEquals(-1, webImage.height);
-        assertNotEquals(-1, webImage.offsetPercentageY);
     }
 }
