@@ -31,7 +31,7 @@ public class RijksSearchFrame extends JFrame {
     String keyString = apiKey.get();
 
     public RijksSearchFrame() {
-        setTitle("feiner.rijks.ImageFrame");
+        setTitle("ImageFrame");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -43,8 +43,8 @@ public class RijksSearchFrame extends JFrame {
         previous = new JButton("previous");
         searchBar = new JTextField(25);
         utilityPanel.add(previous);
-        utilityPanel.add(next);
         utilityPanel.add(searchBar);
+        utilityPanel.add(next);
         add(utilityPanel, BorderLayout.NORTH);
         add(new JScrollPane(imagePanel), BorderLayout.CENTER);
 
@@ -66,11 +66,10 @@ public class RijksSearchFrame extends JFrame {
         });
     }
 
-    private void onNext() {
-        pageNumber++;
-        String query = searchBar.getText();
+    private void getData(String query, int pageNumber) {
+        Disposable disposable;
         if (!query.isEmpty()) {
-            Disposable disposable = service.querySearch(keyString, pageNumber, query)
+            disposable = service.querySearch(keyString, pageNumber, query)
                     // tells Rx to request the data on a background Thread
                     .subscribeOn(Schedulers.io())
                     // tells Rx to handle the response on Swing's main Thread
@@ -80,16 +79,18 @@ public class RijksSearchFrame extends JFrame {
                             (response) -> handleResponse(response),
                             Throwable::printStackTrace);
         } else {
-            Disposable disposable = service.pageSearch(keyString, pageNumber)
-                    // tells Rx to request the data on a background Thread
+            disposable = service.pageSearch(keyString, pageNumber)
                     .subscribeOn(Schedulers.io())
-                    // tells Rx to handle the response on Swing's main Thread
                     .observeOn(SwingSchedulers.edt())
-                    //.observeOn(AndroidSchedulers.mainThread()) // Instead use this on Android only
                     .subscribe(
                             (response) -> handleResponse(response),
                             Throwable::printStackTrace);
         }
+    }
+
+    private void onNext() {
+        pageNumber++;
+        getData(searchBar.getText(), pageNumber);
     }
 
     private void onPrevious() {
@@ -97,42 +98,21 @@ public class RijksSearchFrame extends JFrame {
         if (pageNumber < 0) {
             pageNumber = 0;
         }
-        String query = searchBar.getText();
-        if (!query.isEmpty()) {
-            Disposable disposable = service.querySearch(keyString, pageNumber, query)
-                    // tells Rx to request the data on a background Thread
-                    .subscribeOn(Schedulers.io())
-                    // tells Rx to handle the response on Swing's main Thread
-                    .observeOn(SwingSchedulers.edt())
-                    //.observeOn(AndroidSchedulers.mainThread()) // Instead use this on Android only
-                    .subscribe(
-                            (response) -> handleResponse(response),
-                            Throwable::printStackTrace);
-        } else {
-            Disposable disposable = service.pageSearch(keyString, pageNumber)
-                    // tells Rx to request the data on a background Thread
-                    .subscribeOn(Schedulers.io())
-                    // tells Rx to handle the response on Swing's main Thread
-                    .observeOn(SwingSchedulers.edt())
-                    //.observeOn(AndroidSchedulers.mainThread()) // Instead use this on Android only
-                    .subscribe(
-                            (response) -> handleResponse(response),
-                            Throwable::printStackTrace);
-        }
+        getData(searchBar.getText(), pageNumber);
     }
 
     private void onSearch() {
         pageNumber = 0;
         String query = searchBar.getText();
-            Disposable disposable = service.querySearch(keyString, pageNumber, query)
-                    // tells Rx to request the data on a background Thread
-                    .subscribeOn(Schedulers.io())
-                    // tells Rx to handle the response on Swing's main Thread
-                    .observeOn(SwingSchedulers.edt())
-                    //.observeOn(AndroidSchedulers.mainThread()) // Instead use this on Android only
-                    .subscribe(
-                            (response) -> handleResponse(response),
-                            Throwable::printStackTrace);
+        Disposable disposable = service.querySearch(keyString, pageNumber, query)
+                // tells Rx to request the data on a background Thread
+                .subscribeOn(Schedulers.io())
+                // tells Rx to handle the response on Swing's main Thread
+                .observeOn(SwingSchedulers.edt())
+                //.observeOn(AndroidSchedulers.mainThread()) // Instead use this on Android only
+                .subscribe(
+                        (response) -> handleResponse(response),
+                        Throwable::printStackTrace);
         }
 
     private void handleResponse(ArtObjectCollection response) {
@@ -143,11 +123,7 @@ public class RijksSearchFrame extends JFrame {
                     JLabel label = createImageLabel(artObject);
                     SwingUtilities.invokeLater(() -> imagePanel.add(label));
                 }
-                SwingUtilities.invokeLater(() -> {
-                    imagePanel.revalidate();
-                    imagePanel.repaint();
-                });
-            } catch (Exception ex) {
+            }   catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
@@ -166,7 +142,7 @@ public class RijksSearchFrame extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Clicked:)");
                 try {
-                    new ImageFrame(artObject.webImage.url).setVisible(true);
+                    new ImageFrame(artObject.title, artObject.principalOrFirstMaker, artObject.webImage.url).setVisible(true);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

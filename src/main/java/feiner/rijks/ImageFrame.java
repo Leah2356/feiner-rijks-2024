@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 
 public class ImageFrame extends JFrame {
-    public ImageFrame(String path) throws Exception {
-        setTitle("feiner.rijks.ImageFrame");
+    public ImageFrame(String title, String artist, String path) throws Exception {
+        setTitle(title + " by " + artist);
         setSize(800, 600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
