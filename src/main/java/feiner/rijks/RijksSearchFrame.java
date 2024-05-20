@@ -144,8 +144,7 @@ public class RijksSearchFrame extends JFrame {
                 try {
                     new ImageFrame(artObject.title, artObject.principalOrFirstMaker,
                             artObject.webImage.url).setVisible(true);
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
