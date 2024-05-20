@@ -1,10 +1,7 @@
-package json;
+package feiner.rijks.json;
 
-import com.andrewoid.ApiKey;
 import io.reactivex.rxjava3.core.Single;
-import retrofit2.Retrofit;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 

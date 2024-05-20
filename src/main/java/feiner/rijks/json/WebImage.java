@@ -1,4 +1,4 @@
-package json;
+package feiner.rijks.json;
 
 public class WebImage {
     public String guid;

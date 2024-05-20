@@ -1,3 +1,5 @@
+package feiner.rijks;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +8,7 @@ import java.net.URL;
 
 public class ImageFrame extends JFrame {
     public ImageFrame(String path) throws Exception {
-        setTitle("ImageFrame");
+        setTitle("feiner.rijks.ImageFrame");
         setSize(800, 600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 

@@ -1,4 +1,4 @@
-package json;
+package feiner.rijks.json;
 
 public class ArtObject {
     // Each art object has a title, longTitle, webImage and principalOrFirstMaker

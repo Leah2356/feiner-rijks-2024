@@ -1,10 +1,12 @@
+package feiner.rijks;
+
 import hu.akarnokd.rxjava3.swing.SwingSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import json.ArtObject;
-import json.ArtObjectCollection;
-import json.RijksService;
-import json.RijksServiceFactory;
+import feiner.rijks.json.ArtObject;
+import feiner.rijks.json.ArtObjectCollection;
+import feiner.rijks.json.RijksService;
+import feiner.rijks.json.RijksServiceFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,24 +15,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.concurrent.Executors;
 
 import com.andrewoid.ApiKey;
 
 public class RijksSearchFrame extends JFrame {
-    final private RijksService service;
-    final private JButton previous;
-    final private JButton next;
-    final private JTextField searchBar;
-    final private JPanel imagePanel;
+    private final RijksService service;
+    private final JButton previous;
+    private final JButton next;
+    private final JTextField searchBar;
+    private final JPanel imagePanel;
     private int pageNumber = 0;
     ApiKey apiKey = new ApiKey();
     String keyString = apiKey.get();
 
     public RijksSearchFrame() {
-        setTitle("ImageFrame");
+        setTitle("feiner.rijks.ImageFrame");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
