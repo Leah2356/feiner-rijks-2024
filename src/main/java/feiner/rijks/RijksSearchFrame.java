@@ -142,7 +142,8 @@ public class RijksSearchFrame extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Clicked:)");
                 try {
-                    new ImageFrame(artObject.title, artObject.principalOrFirstMaker, artObject.webImage.url).setVisible(true);
+                    new ImageFrame(artObject.title, artObject.principalOrFirstMaker,
+                            artObject.webImage.url).setVisible(true);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
