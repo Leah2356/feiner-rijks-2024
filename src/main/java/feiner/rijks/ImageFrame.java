@@ -11,14 +11,14 @@ public class ImageFrame extends JFrame {
         setTitle(title + " by " + artist);
         setSize(800, 600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout());
 
         URL url = new URL(path);
         BufferedImage image = ImageIO.read(url);
-        Image scaledImage = image.getScaledInstance(-1, 800, Image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(800, -1, Image.SCALE_SMOOTH);
         JLabel label = new JLabel(new ImageIcon(scaledImage));
 
         JScrollPane scrollPane = new JScrollPane(label);
-        scrollPane.setPreferredSize(new Dimension(800, 600));
         add(scrollPane, BorderLayout.CENTER);
     }
 }
