@@ -1,7 +1,6 @@
 package feiner.rijks;
 
 import feiner.rijks.json.*;
-import feiner.rijks.json.*;
 import org.junit.jupiter.api.Test;
 import com.andrewoid.ApiKey;
 
