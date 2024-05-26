@@ -27,8 +27,8 @@ public class RijksSearchFrame extends JFrame {
     private final JTextField searchBar;
     private final JPanel imagePanel;
     private int pageNumber = 0;
-    ApiKey apiKey = new ApiKey();
-    String keyString = apiKey.get();
+    private final ApiKey apiKey = new ApiKey();
+    private final String keyString = apiKey.get();
 
     public RijksSearchFrame() {
         setTitle("ImageFrame");
